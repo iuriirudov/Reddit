@@ -1,6 +1,6 @@
-package com.reddit.reddit.repository;
+package com.example.reddit.repository;
 
-import com.reddit.reddit.model.Post;
+import com.example.reddit.model.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

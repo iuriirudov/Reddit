@@ -1,15 +1,15 @@
-package com.reddit.reddit.model;
+package com.example.reddit.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 import java.time.Instant;
+import java.util.List;
 
 import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
@@ -19,32 +19,24 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Post {
+public class Subreddit {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long postId;
+    private Long id;
 
-    @NotBlank(message = "Post name cannot be empty")
-    private String postName;
+    @NotBlank(message = "Subreddit name is required")
+    private String name;
 
-    @Nullable
-    private String url;
-
-    @Nullable
-    @Lob
+    @NotBlank(message = "Description is required")
     private String description;
 
-    private Integer voteCount;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
-    private User user;
+    @OneToMany(fetch = LAZY)
+    private List<Post> posts;
 
     private Instant created;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Subreddit subreddit;
+    private User user;
 
 }
